@@ -1,0 +1,18 @@
+.header__container {
+  width: 68.75%;
+  margin: 0 auto;
+  min-height: 74px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 800px) {
+  .header__container {
+    min-height: 56px;
+  }
+}
+
+@media (max-width: 500px) {
+  .header__container {
+    width: 88.125%;
+  }
+}
