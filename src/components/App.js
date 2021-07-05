@@ -10,6 +10,10 @@ import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import RemovePopup from './RemovePopup';
 import InfoTooltip from './InfoTooltip'
+import { Route, BrowserRouter, Switch } from 'react-router-dom'
+import Register from './Register'
+import Login from './Login'
+import ProtectedRoute from './ProtectedRoute'
 
 function App() {
 
@@ -33,7 +37,7 @@ function App() {
 
   const [selectedCard, setSelectedCard] = React.useState(null);
 
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(true);
   const [isLogin, setIsLogin] = React.useState(false);
 
   React.useEffect(() => {
@@ -170,9 +174,23 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page" tabIndex="0" onKeyDown={isRemovePopupOpen || isEditAvatarPopupOpen || isEditProfilePopupOpen || isImagePopupOpen || isAddPlacePopupOpen ? handleKeyDown : null }>
         <div className="page__content">
-          <Header isLogin={isLogin} loggedIn={loggedIn} />
-          <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} cards={cards} onCardLike={handleCardLike} onCardDelete={handleRemovePopupClick} loggedIn={loggedIn} onLogin={handleLogin} onLoginClick={handleLoginClick} />
-          <Footer />
+          <BrowserRouter>
+            <Route path="/">
+              <Header />
+            </Route>
+            <Switch>
+              <Route path="/sign-up">
+                <Register />
+              </Route>
+              <Route path="/sign-in">
+                <Login />
+              </Route>
+              <ProtectedRoute component={Main} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} cards={cards} onCardLike={handleCardLike} onCardDelete={handleRemovePopupClick} loggedIn={loggedIn} onLogin={handleLogin} onLoginClick={handleLoginClick} />
+            </Switch>
+            <Route exact path="/">
+                <Footer />
+            </Route>
+          </BrowserRouter>
           <EditProfilePopup isOpen={isEditProfilePopupOpen} isLoading={isEditProfilePopupLoading} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
           <AddPlacePopup isOpen={isAddPlacePopupOpen} isLoading={isAddPlacePopupLoading} onClose={closeAllPopups} onAddPlace={handleAddPlace} />
           <ImagePopup isOpen={isImagePopupOpen} card={selectedCard} onClose={closeAllPopups} />
