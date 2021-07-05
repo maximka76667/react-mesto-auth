@@ -2,20 +2,21 @@ import React from 'react'
 import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom'
 import ProtectedRoute from './ProtectedRoute'
 import Cards from './Cards'
+import Register from './Register'
+import Login from './Login'
 
 export default function Main(props) {
   return (
     <main className="content">
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Switch>
-          <ProtectedRoute exact path="/" />
           <Route path="/sign-up">
-          <button>Registr</button>
+            <Register />
           </Route>
           <Route path="/sign-in">
-            <button>Login</button>
+            <Login {...props} />
           </Route>
-          <ProtectedRoute path="/cards" {...props} component={Cards} />
+          <ProtectedRoute path="/" {...props} component={Cards} />
         </Switch>
       </BrowserRouter>
     </main>

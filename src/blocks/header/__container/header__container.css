@@ -1,8 +1,10 @@
 .header__container {
   width: 68.75%;
   margin: 0 auto;
-  min-height: 74px;
+  min-height: 34px;
   box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
 }
 
 @media (max-width: 800px) {

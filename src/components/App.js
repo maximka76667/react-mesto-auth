@@ -9,6 +9,7 @@ import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import RemovePopup from './RemovePopup';
+import InfoTooltip from './InfoTooltip'
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isRemovePopupOpen, setIsRemovePopupOpen] = React.useState(false);
   const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
 
   // isLoading
   const [isEditProfilePopupLoading, setIsEditProfilePopupLoading] = React.useState(false);
@@ -31,7 +33,8 @@ function App() {
 
   const [selectedCard, setSelectedCard] = React.useState(null);
 
-  const [loggedIn, setLoggedIn] = React.useState(true);
+  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [isLogin, setIsLogin] = React.useState(false);
 
   React.useEffect(() => {
     api.getInitialCards()
@@ -90,6 +93,7 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsRemovePopupOpen(false);
     setIsImagePopupOpen(false);
+    setIsInfoTooltipOpen(false);
     setSelectedCard(null);
   }
 
@@ -134,6 +138,20 @@ function App() {
     })
   }
 
+  function handleLoginClick() {
+    setIsLogin(true);
+  }
+
+  function handleRegister() {
+
+  }
+
+  function handleLogin() {
+    setIsInfoTooltipOpen(true);
+    setLoggedIn(true);
+    console.log(loggedIn);
+  }
+
   function handleKeyDown(e) {
     if(e.keyCode === 27) {
       closeAllPopups();
@@ -152,14 +170,15 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page" tabIndex="0" onKeyDown={isRemovePopupOpen || isEditAvatarPopupOpen || isEditProfilePopupOpen || isImagePopupOpen || isAddPlacePopupOpen ? handleKeyDown : null }>
         <div className="page__content">
-          <Header />
-          <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} cards={cards} onCardLike={handleCardLike} onCardDelete={handleRemovePopupClick} loggedIn={loggedIn} />
+          <Header isLogin={isLogin} loggedIn={loggedIn} />
+          <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} cards={cards} onCardLike={handleCardLike} onCardDelete={handleRemovePopupClick} loggedIn={loggedIn} onLogin={handleLogin} onLoginClick={handleLoginClick} />
           <Footer />
           <EditProfilePopup isOpen={isEditProfilePopupOpen} isLoading={isEditProfilePopupLoading} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
           <AddPlacePopup isOpen={isAddPlacePopupOpen} isLoading={isAddPlacePopupLoading} onClose={closeAllPopups} onAddPlace={handleAddPlace} />
           <ImagePopup isOpen={isImagePopupOpen} card={selectedCard} onClose={closeAllPopups} />
           <EditAvatarPopup isOpen={isEditAvatarPopupOpen} isLoading={isEditAvatarPopupLoading} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
           <RemovePopup card={selectedCard} onClose={closeAllPopups} isOpen={isRemovePopupOpen} isLoading={isRemovePopupLoading} onCardDelete={handleCardDelete} />
+          <InfoTooltip isOpen={isInfoTooltipOpen} onClose={closeAllPopups} />
         </div>
       </div>
     </CurrentUserContext.Provider>
