@@ -203,24 +203,22 @@ function App(props) {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page" tabIndex="0" onKeyDown={isRemovePopupOpen || isEditAvatarPopupOpen || isEditProfilePopupOpen || isImagePopupOpen || isAddPlacePopupOpen ? handleKeyDown : null }>
         <div className="page__content">
-            <Route path="/">
-              <Header onLogout={handleLogout} email={email} />
+          <Route path="/">
+            <Header onLogout={handleLogout} email={email} />
+          </Route>
+          <Switch>
+            <Route path="/sign-up">
+              <Register onRegister={handleRegister} onError={handleError} />
             </Route>
-            <Switch>
-              <Route path="/sign-up">
-                <Register onRegister={handleRegister} onError={handleError} />
-              </Route>
-              <Route path="/sign-in">
-                <Login onLogin={handleLogin} onError={handleError} />
-              </Route>
-              <ProtectedRoute component={Main} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} cards={cards} onCardLike={handleCardLike} onCardDelete={handleRemovePopupClick} loggedIn={loggedIn} />
-            </Switch>
-            <Route exact path="/">
-              <Footer />
+            <Route path="/sign-in">
+              <Login onLogin={handleLogin} onError={handleError} />
             </Route>
-            <Route path="/">
-              <InfoTooltip isOpen={isInfoTooltipOpen} onClose={closeAllPopups} result={loginResult} />
-            </Route>
+            <ProtectedRoute component={Main} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} cards={cards} onCardLike={handleCardLike} onCardDelete={handleRemovePopupClick} loggedIn={loggedIn} />
+          </Switch>
+          <Route exact path="/">
+            <Footer />
+          </Route>
+          <InfoTooltip isOpen={isInfoTooltipOpen} onClose={closeAllPopups} result={loginResult} />
           <EditProfilePopup isOpen={isEditProfilePopupOpen} isLoading={isEditProfilePopupLoading} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
           <AddPlacePopup isOpen={isAddPlacePopupOpen} isLoading={isAddPlacePopupLoading} onClose={closeAllPopups} onAddPlace={handleAddPlace} />
           <ImagePopup isOpen={isImagePopupOpen} card={selectedCard} onClose={closeAllPopups} />
