@@ -22,10 +22,10 @@ function Header(props) {
                 <Link to="/sign-in" className="header__link header__link_logged-in" onClick={props.onLogout}>Выйти</Link>
               </>)
 
-              default:
-                return <Link to="/" className="header__link">Ссылка</Link>
-            }
-          })()
+            default:
+              return <Link to="/" className="header__link">Ссылка</Link>
+          }
+        })()
         }
       </div>
     </header>

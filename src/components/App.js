@@ -147,6 +147,7 @@ function App(props) {
   function handleLogin(token) {
     auth.getEmail(token)
     .then((res) => {
+      localStorage.setItem('token', token);
       setLoggedIn(true);
       setLoginResult(true);
       setIsInfoTooltipOpen(true);

@@ -36,12 +36,6 @@ class Auth {
       })
     })
     .then(this._checkResponse)
-    .then(data => {
-      if(data.token) {
-        localStorage.setItem('token', data.token);
-        return data;
-      }
-    })
   }
 
   getEmail(token) {
