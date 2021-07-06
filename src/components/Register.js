@@ -19,11 +19,12 @@ function Register(props) {
     e.preventDefault();
       auth.register({email, password})
       .then((res) => {
-        if(res) {
-          console.log(res);
-          props.history.push('/');
-        }
+        setEmail('');
+        setPassword('');
+        console.log(res);
+        props.onRegister();
       })
+      .catch((err) => props.onError(err))
   }
 
   return (

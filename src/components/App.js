@@ -10,12 +10,13 @@ import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import RemovePopup from './RemovePopup';
 import InfoTooltip from './InfoTooltip'
-import { Route, BrowserRouter, Switch } from 'react-router-dom'
+import { Route, Switch, withRouter } from 'react-router-dom'
 import Register from './Register'
 import Login from './Login'
 import ProtectedRoute from './ProtectedRoute'
+import auth from '../utils/auth'
 
-function App() {
+function App(props) {
 
   const [currentUser, setCurrentUser] = React.useState({});
 
@@ -37,8 +38,9 @@ function App() {
 
   const [selectedCard, setSelectedCard] = React.useState(null);
 
-  const [loggedIn, setLoggedIn] = React.useState(true);
-  const [isLogin, setIsLogin] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loginResult, setLoginResult] = React.useState(false);
+  const [email, setEmail] = React.useState('');
 
   React.useEffect(() => {
     api.getInitialCards()
@@ -142,18 +144,32 @@ function App() {
     })
   }
 
-  function handleLoginClick() {
-    setIsLogin(true);
+  function handleLogin(token) {
+    auth.getEmail(token)
+    .then((res) => {
+      setLoggedIn(true);
+      setLoginResult(true);
+      setIsInfoTooltipOpen(true);
+      setEmail(res.data.email);
+      props.history.push('/');
+    })
+    .catch((err) => console.log(err))
+  }
+
+  function handleLogout() {
+    setLoggedIn(false);
   }
 
   function handleRegister() {
-
-  }
-
-  function handleLogin() {
+    setLoginResult(true);
     setIsInfoTooltipOpen(true);
-    setLoggedIn(true);
-    console.log(loggedIn);
+    props.history.push('/sign-in');
+  }
+  
+  function handleError(error) {
+    setLoginResult(false);
+    setIsInfoTooltipOpen(true);
+    console.log(error);
   }
 
   function handleKeyDown(e) {
@@ -161,6 +177,17 @@ function App() {
       closeAllPopups();
     }
   }
+
+  function handleTokenCheck() {
+    if (localStorage.getItem('token')) {
+      const token = localStorage.getItem('token');
+      handleLogin(token);
+    }
+  }
+
+  React.useEffect(() => {
+    handleTokenCheck();
+  }, [])
 
   React.useEffect(() => {
     api.getProfileInfo()
@@ -174,33 +201,33 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page" tabIndex="0" onKeyDown={isRemovePopupOpen || isEditAvatarPopupOpen || isEditProfilePopupOpen || isImagePopupOpen || isAddPlacePopupOpen ? handleKeyDown : null }>
         <div className="page__content">
-          <BrowserRouter>
             <Route path="/">
-              <Header />
+              <Header onLogout={handleLogout} email={email} />
             </Route>
             <Switch>
               <Route path="/sign-up">
-                <Register />
+                <Register onRegister={handleRegister} onError={handleError} />
               </Route>
               <Route path="/sign-in">
-                <Login />
+                <Login onLogin={handleLogin} onError={handleError} />
               </Route>
-              <ProtectedRoute component={Main} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} cards={cards} onCardLike={handleCardLike} onCardDelete={handleRemovePopupClick} loggedIn={loggedIn} onLogin={handleLogin} onLoginClick={handleLoginClick} />
+              <ProtectedRoute component={Main} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} cards={cards} onCardLike={handleCardLike} onCardDelete={handleRemovePopupClick} loggedIn={loggedIn} />
             </Switch>
             <Route exact path="/">
-                <Footer />
+              <Footer />
             </Route>
-          </BrowserRouter>
+            <Route path="/">
+              <InfoTooltip isOpen={isInfoTooltipOpen} onClose={closeAllPopups} result={loginResult} />
+            </Route>
           <EditProfilePopup isOpen={isEditProfilePopupOpen} isLoading={isEditProfilePopupLoading} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
           <AddPlacePopup isOpen={isAddPlacePopupOpen} isLoading={isAddPlacePopupLoading} onClose={closeAllPopups} onAddPlace={handleAddPlace} />
           <ImagePopup isOpen={isImagePopupOpen} card={selectedCard} onClose={closeAllPopups} />
           <EditAvatarPopup isOpen={isEditAvatarPopupOpen} isLoading={isEditAvatarPopupLoading} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
           <RemovePopup card={selectedCard} onClose={closeAllPopups} isOpen={isRemovePopupOpen} isLoading={isRemovePopupLoading} onCardDelete={handleCardDelete} />
-          <InfoTooltip isOpen={isInfoTooltipOpen} onClose={closeAllPopups} />
         </div>
       </div>
     </CurrentUserContext.Provider>
   );
 }
 
-export default App;
+export default withRouter(App);
