@@ -18,6 +18,9 @@ function InfoTooltip(props) {
               
               case '/sign-in':
                 return 'Вы успешно зарегистрировались!'
+
+              default:
+                return 'Успех!'
             }
           })()
           : 'Что-то пошло не так! Попробуйте ещё раз.'}

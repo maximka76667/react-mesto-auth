@@ -7,7 +7,7 @@ function Header(props) {
   return (
     <header className="header">
       <div className="header__container">
-        <a href="/" className="logo" rel="noreferrer" target="_blank" />
+        <a href="/" className="logo" rel="noreferrer" target="_blank"> </a>
         { (() => {
           switch (location.pathname) {
             case '/sign-in':
@@ -21,6 +21,9 @@ function Header(props) {
                 <p className="header__login">{props.email}</p>
                 <Link to="/sign-in" className="header__link header__link_logged-in" onClick={props.onLogout}>Выйти</Link>
               </>)
+
+              default:
+                return <Link to="/" className="header__link">Ссылка</Link>
             }
           })()
         }

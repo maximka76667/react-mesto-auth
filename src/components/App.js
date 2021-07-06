@@ -158,6 +158,7 @@ function App(props) {
 
   function handleLogout() {
     setLoggedIn(false);
+    localStorage.removeItem('token');
   }
 
   function handleRegister() {
