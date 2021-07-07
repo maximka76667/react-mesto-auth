@@ -31,7 +31,8 @@ class Api {
         name: data.name,
         about: data.about,
       }),
-    }).then(this._checkResponse);
+    })
+    .then(this._checkResponse);
   }
 
   getProfileInfo() {
@@ -40,7 +41,8 @@ class Api {
         authorization: this._token,
         'Content-Type': 'application/json',
       },
-    }).then(this._checkResponse);
+    })
+    .then(this._checkResponse);
   }
 
   addPlace(data) {
@@ -54,7 +56,8 @@ class Api {
         name: data.name,
         link: data.link,
       }),
-    }).then(this._checkResponse);
+    })
+    .then(this._checkResponse);
   }
 
   removeCard(cardId) {
@@ -63,7 +66,8 @@ class Api {
       headers: {
         authorization: this._token,
       },
-    }).then(this._checkResponse);
+    })
+    .then(this._checkResponse);
   }
 
   changeLikeCardStatus(cardId, isLiked) {
@@ -72,7 +76,8 @@ class Api {
       headers: {
         authorization: this._token,
       },
-    }).then(this._checkResponse);
+    })
+    .then(this._checkResponse);
   }
 
   changeAvatar(avatarLink) {
@@ -85,7 +90,8 @@ class Api {
       body: JSON.stringify({
         avatar: avatarLink,
       }),
-    }).then(this._checkResponse);
+    })
+    .then(this._checkResponse);
   }
 }
 

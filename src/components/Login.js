@@ -1,6 +1,5 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import auth from '../utils/auth'
 
 function Login(props) {
 
@@ -17,16 +16,9 @@ function Login(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-
-    auth.login({login, password})
-    .then((data) => {
-      if(data.token) {
-        setLogin('');
-        setPassword('');
-        props.onLogin(data.token);
-      }
-    })
-    .catch(err => props.onError(err));
+    props.onLogin({login, password});
+    setLogin('');
+    setPassword('');
   }
 
   return (
@@ -34,8 +26,8 @@ function Login(props) {
       <div className="auth__container">
         <h2 className="auth__title">Вход</h2>
         <form className="auth__form" onSubmit={handleSubmit}>
-          <input className="auth__input" placeholder="Логин" onChange={handleLoginChange} />
-          <input className="auth__input" placeholder="Пароль" onChange={handlePasswordChange} />
+          <input className="auth__input" placeholder="Логин" value={login} onChange={handleLoginChange} />
+          <input className="auth__input" placeholder="Пароль" value={password} onChange={handlePasswordChange} />
           <button className="auth__submit-button">Войти</button>
         </form>
       </div>

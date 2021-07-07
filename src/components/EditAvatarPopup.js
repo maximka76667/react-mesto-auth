@@ -1,10 +1,7 @@
 import React from 'react'
 import PopupWithForm from './PopupWithForm'
-import CurrentUserContext from '../contexts/CurrentUserContext'
 
 export default function EditAvatarPopup({ isOpen, isLoading, onClose, onUpdateAvatar }) {
-
-  const currentUser = React.useContext(CurrentUserContext);
 
   const [avatar, setAvatar] = React.useState('');
 
@@ -50,13 +47,10 @@ export default function EditAvatarPopup({ isOpen, isLoading, onClose, onUpdateAv
   }
 
   React.useEffect(() => {
-    setAvatar('');
-  }, [isOpen, currentUser])
-
-  React.useEffect(() => {
     setIsError(false);
     setIsSubmitValid(false);
     setError('');
+    setAvatar('');
   }, [isOpen])
 
   return (

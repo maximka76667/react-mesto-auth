@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
-import auth from '../utils/auth'
 
 function Register(props) {
 
@@ -15,16 +14,11 @@ function Register(props) {
     setPassword(e.target.value);
   }
 
-  const handleSubmit = (e) => {
+  function handleSubmit(e) {
     e.preventDefault();
-      auth.register({email, password})
-      .then((res) => {
-        setEmail('');
-        setPassword('');
-        console.log(res);
-        props.onRegister();
-      })
-      .catch((err) => props.onError(err))
+    props.onRegister({email, password});
+    setEmail('');
+    setPassword('');
   }
 
   return (
@@ -32,8 +26,8 @@ function Register(props) {
       <div className="auth__container">
         <h2 className="auth__title">Регистрация</h2>
         <form className="auth__form" onSubmit={handleSubmit}>
-          <input className="auth__input" placeholder="Логин" onChange={handleChangeEmail} />
-          <input className="auth__input" placeholder="Пароль" onChange={handleChangePassword} />
+          <input className="auth__input" placeholder="Логин" value={email} onChange={handleChangeEmail} />
+          <input className="auth__input" placeholder="Пароль" value={password} onChange={handleChangePassword} />
           <button className="auth__submit-button">Зарегистрироваться</button>
         </form>
         <Link to="/sign-in" className="auth__login-link">Уже зарегистрированы? Войти</Link>
