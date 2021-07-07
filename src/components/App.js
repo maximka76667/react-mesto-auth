@@ -29,10 +29,7 @@ function App(props) {
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
 
   // isLoading
-  const [isEditProfilePopupLoading, setIsEditProfilePopupLoading] = React.useState(false);
-  const [isAddPlacePopupLoading, setIsAddPlacePopupLoading] = React.useState(false);
-  const [isEditAvatarPopupLoading, setIsEditAvatarPopupLoading] = React.useState(false);
-  const [isRemovePopupLoading, setIsRemovePopupLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const [cards, setCards] = React.useState([]);
 
@@ -60,7 +57,7 @@ function App(props) {
   }
 
   function handleCardDelete(card) {
-    setIsRemovePopupLoading(true);
+    setIsLoading(true);
     api.removeCard(card._id).then(() => {
       setCards((cardList) => {
         return cardList.filter((newCard) => newCard._id !== card._id)
@@ -68,7 +65,7 @@ function App(props) {
       closeAllPopups();
     })
     .catch((err) => console.log(err))
-    .finally(() => setIsRemovePopupLoading(false))
+    .finally(() => setIsLoading(false))
   }
 
   function handleRemovePopupClick(card) {
@@ -104,19 +101,19 @@ function App(props) {
   }
 
   function handleUpdateUser(data) {
-    setIsEditProfilePopupLoading(true);
+    setIsLoading(true);
     api.setProfileInfo(data).then((res) => {
       setCurrentUser(res);
       closeAllPopups();
     })
     .catch((err) => console.log(err))
     .finally(() => {
-      setIsEditProfilePopupLoading(false);
+      setIsLoading(false);
     })
   }
 
   function handleUpdateAvatar({avatar}) {
-    setIsEditAvatarPopupLoading(true);
+    setIsLoading(true);
     api.changeAvatar(avatar).then((res) => {
       setCurrentUser(res);
       closeAllPopups();
@@ -125,12 +122,12 @@ function App(props) {
       console.log(err)
     })
     .finally(() => {
-      setIsEditAvatarPopupLoading(false);
+      setIsLoading(false);
     })
   }
 
   function handleAddPlace(data) {
-    setIsAddPlacePopupLoading(true);
+    setIsLoading(true);
     api.addPlace({
       name: data.name,
       link: data.link
@@ -140,7 +137,7 @@ function App(props) {
     })
     .catch((err) => console.log(err))
     .finally(() => {
-      setIsAddPlacePopupLoading(false);
+      setIsLoading(false);
     })
   }
 
@@ -219,11 +216,11 @@ function App(props) {
             <Footer />
           </Route>
           <InfoTooltip isOpen={isInfoTooltipOpen} onClose={closeAllPopups} result={loginResult} />
-          <EditProfilePopup isOpen={isEditProfilePopupOpen} isLoading={isEditProfilePopupLoading} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
-          <AddPlacePopup isOpen={isAddPlacePopupOpen} isLoading={isAddPlacePopupLoading} onClose={closeAllPopups} onAddPlace={handleAddPlace} />
+          <EditProfilePopup isOpen={isEditProfilePopupOpen} isLoading={isLoading} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
+          <AddPlacePopup isOpen={isAddPlacePopupOpen} isLoading={isLoading} onClose={closeAllPopups} onAddPlace={handleAddPlace} />
           <ImagePopup isOpen={isImagePopupOpen} card={selectedCard} onClose={closeAllPopups} />
-          <EditAvatarPopup isOpen={isEditAvatarPopupOpen} isLoading={isEditAvatarPopupLoading} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
-          <RemovePopup card={selectedCard} onClose={closeAllPopups} isOpen={isRemovePopupOpen} isLoading={isRemovePopupLoading} onCardDelete={handleCardDelete} />
+          <EditAvatarPopup isOpen={isEditAvatarPopupOpen} isLoading={isLoading} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
+          <RemovePopup card={selectedCard} onClose={closeAllPopups} isOpen={isRemovePopupOpen} isLoading={isLoading} onCardDelete={handleCardDelete} />
         </div>
       </div>
     </CurrentUserContext.Provider>
