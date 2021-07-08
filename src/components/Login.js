@@ -26,8 +26,8 @@ function Login(props) {
       <div className="auth__container">
         <h2 className="auth__title">Вход</h2>
         <form className="auth__form" onSubmit={handleSubmit}>
-          <input className="auth__input" placeholder="Логин" value={login} onChange={handleLoginChange} />
-          <input className="auth__input" placeholder="Пароль" value={password} onChange={handlePasswordChange} />
+          <input className="auth__input" type="text" id="loginLogin" placeholder="Логин" value={login} onChange={handleLoginChange} required />
+          <input className="auth__input" type="text" id="loginPassword" placeholder="Пароль" value={password} onChange={handlePasswordChange} required />
           <button className="auth__submit-button">Войти</button>
         </form>
       </div>
