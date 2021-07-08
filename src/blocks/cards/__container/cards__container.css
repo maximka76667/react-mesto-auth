@@ -15,7 +15,7 @@
 }
 @media (max-width: 715px) {
   .cards__container {
-    grid-template-columns: 1fr;
+    grid-template-columns: 100%;
   }
 }
 @media (max-width: 500px) {

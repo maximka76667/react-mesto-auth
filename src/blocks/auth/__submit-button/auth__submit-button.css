@@ -16,15 +16,14 @@
 }
 
 .auth__submit-button:hover {
-  background-color: #fff;
-  color: #000;
-  opacity: 1;
+  background-color: #a9a9a9;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 800px) {
   .auth__submit-button {
     height: 46px;
-    font-size: 14px;
-    line-height: 17px;
+    font-size: 16px;
+    line-height: 19px;
+    margin: 170px 0 20px;
   }
 }
