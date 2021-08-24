@@ -16,6 +16,6 @@
 ## Ссылки
 
 Макет в Figma: [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1])  
-GitHub: https://github.com/maximka76667/react-mesto-auth
-GitHub-pages: https://maximka76667.github.io/react-mesto-auth
-My Domain: https://max76667.mesto.nomoredomains.monster
+GitHub: https://github.com/maximka76667/react-mesto-auth  
+GitHub-pages: https://maximka76667.github.io/react-mesto-auth  
+My Domain: https://max76667.mesto.nomoredomains.monster  
