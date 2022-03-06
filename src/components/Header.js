@@ -11,15 +11,11 @@ function Header(props) {
   const [isMenuAllowed, setIsMenuAllowed] = React.useState(false);
 
   function toggleMenu() {
-    if(isMenuOpen) {
-      setIsMenuOpen(false);
-    } else {
-      setIsMenuOpen(true);
-    }
+    setIsMenuOpen(!isMenuOpen);
   }
 
   function checkResize() {
-    if(window.innerWidth < 500) {
+    if (window.innerWidth < 500) {
       setIsMenuAllowed(true);
     } else {
       setIsMenuAllowed(false);
@@ -44,8 +40,8 @@ function Header(props) {
         <Link to="/sign-in" className="header__link header__link_logged-in" onClick={handleLogoutClick}>Выйти</Link>
       </div>
       <div className="header__container">
-        <a href="/" className="logo" rel="noreferrer" target="_blank"> </a>
-        { (() => {
+        <Link to="/" className="logo"></Link>
+        {(() => {
           switch (location.pathname) {
             case '/sign-in':
               return <Link to="/sign-up" className="header__link">Регистрация</Link>
