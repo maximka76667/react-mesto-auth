@@ -43,11 +43,11 @@ function App(props) {
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
-    
+
     api.changeLikeCardStatus(card._id, isLiked).then((newCard) => {
       setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
     })
-    .catch((err) => console.log(err))
+      .catch((err) => console.log(err))
   }
 
   function handleCardDelete(card) {
@@ -58,8 +58,8 @@ function App(props) {
       })
       closeAllPopups();
     })
-    .catch((err) => console.log(err))
-    .finally(() => setIsLoading(false))
+      .catch((err) => console.log(err))
+      .finally(() => setIsLoading(false))
   }
 
   function handleRemovePopupClick(card) {
@@ -100,24 +100,24 @@ function App(props) {
       setCurrentUser(res);
       closeAllPopups();
     })
-    .catch((err) => console.log(err))
-    .finally(() => {
-      setIsLoading(false);
-    })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setIsLoading(false);
+      })
   }
 
-  function handleUpdateAvatar({avatar}) {
+  function handleUpdateAvatar({ avatar }) {
     setIsLoading(true);
     api.changeAvatar(avatar).then((res) => {
       setCurrentUser(res);
       closeAllPopups();
     })
-    .catch((err) => {
-      console.log(err)
-    })
-    .finally(() => {
-      setIsLoading(false);
-    })
+      .catch((err) => {
+        console.log(err)
+      })
+      .finally(() => {
+        setIsLoading(false);
+      })
   }
 
   function handleAddPlace(data) {
@@ -129,33 +129,33 @@ function App(props) {
       setCards([newCard, ...cards]);
       closeAllPopups();
     })
-    .catch((err) => console.log(err))
-    .finally(() => {
-      setIsLoading(false);
-    })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setIsLoading(false);
+      })
   }
 
-  function handleLogin({login, password}) {
-    auth.login({login, password})
-    .then((data) => {
-      if(data.token) {
-        handleAuth(data.token);
-      }
-    })
-    .catch(err => handleError(err));
+  function handleLogin({ login, password }) {
+    auth.login({ login, password })
+      .then((data) => {
+        if (data.token) {
+          handleAuth(data.token);
+        }
+      })
+      .catch(err => handleError(err));
   }
 
   function handleAuth(token) {
     auth.getEmail(token)
-    .then((res) => {
-      localStorage.setItem('token', token);
-      setLoggedIn(true);
-      setLoginResult(true);
-      setIsInfoTooltipOpen(true);
-      setEmail(res.data.email);
-      props.history.push('/');
-    })
-    .catch(err => handleError(err))
+      .then((res) => {
+        localStorage.setItem('token', token);
+        setLoggedIn(true);
+        setLoginResult(true);
+        setIsInfoTooltipOpen(true);
+        setEmail(res.data.email);
+        props.history.push('/');
+      })
+      .catch(err => handleError(err))
   }
 
   function handleLogout() {
@@ -163,16 +163,16 @@ function App(props) {
     localStorage.removeItem('token');
   }
 
-  function handleRegister({email, password}) {
-    auth.register({email, password})
-    .then(() => {
-      setLoginResult(true);
-      setIsInfoTooltipOpen(true);
-      props.history.push('/sign-in');
-    })
-    .catch((err) => handleError(err))
+  function handleRegister({ email, password }) {
+    auth.register({ email, password })
+      .then(() => {
+        setLoginResult(true);
+        setIsInfoTooltipOpen(true);
+        props.history.push('/sign-in');
+      })
+      .catch((err) => handleError(err))
   }
-  
+
   function handleError(error) {
     setLoginResult(false);
     setIsInfoTooltipOpen(true);
@@ -180,7 +180,7 @@ function App(props) {
   }
 
   function handleKeyDown(e) {
-    if(e.keyCode === 27) {
+    if (e.keyCode === 27) {
       closeAllPopups();
     }
   }
@@ -196,16 +196,17 @@ function App(props) {
     handleTokenCheck();
 
     api.getProfileInfo()
-    .then((data) => {
-      setCurrentUser(data)
-    })
-    .catch((err) => console.log(err))
+      .then((data) => {
+        setCurrentUser(data)
+      })
+      .catch((err) => console.log(err))
 
     api.getInitialCards()
-    .then((result) => {
-      setCards(result)
-    })
-    .catch((err) => console.log(err))
+      .then((result) => {
+        setCards(result)
+      })
+      .catch((err) => console.log(err))
+    // eslint-disable-next-line
   }, [])
 
   return (
@@ -234,7 +235,7 @@ function App(props) {
               cards={cards}
               onCardLike={handleCardLike}
               onCardDelete={handleRemovePopupClick}
-              loggedIn={loggedIn} 
+              loggedIn={loggedIn}
             />
           </Switch>
 
@@ -274,7 +275,7 @@ function App(props) {
             onClose={closeAllPopups}
             onUpdateAvatar={handleUpdateAvatar}
           />
-          
+
           <RemovePopup
             card={selectedCard}
             onClose={closeAllPopups}
