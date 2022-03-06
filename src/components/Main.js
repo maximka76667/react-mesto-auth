@@ -16,7 +16,7 @@ export default function Main(props) {
             <img
               src={currentUser.avatar}
               className="profile__avatar-image"
-              alt="Аватар профиля"
+              alt="Profile avatar"
             />
           </div>
           <div className="profile__info">

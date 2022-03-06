@@ -37,31 +37,31 @@ function Header(props) {
     <header className="header">
       <div className={`header__menu ${isMenuOpen ? 'header__menu_opened' : ''}`}>
         <p className="header__login">{props.email}</p>
-        <Link to="/sign-in" className="header__link header__link_logged-in" onClick={handleLogoutClick}>Выйти</Link>
+        <Link to="/sign-in" className="header__link header__link_logged-in" onClick={handleLogoutClick}>Logout</Link>
       </div>
       <div className="header__container">
         <Link to="/" className="logo"></Link>
         {(() => {
           switch (location.pathname) {
             case '/sign-in':
-              return <Link to="/sign-up" className="header__link">Регистрация</Link>
+              return <Link to="/sign-up" className="header__link">Sign up</Link>
 
             case '/sign-up':
-              return <Link to="/sign-in" className="header__link">Войти</Link>
+              return <Link to="/sign-in" className="header__link">Sign in</Link>
 
             case '/':
               return (
                 <>
                   <p className={`header__login ${isMenuAllowed ? 'header__login_hidden' : ''}`}>{props.email}</p>
-                  <Link to="/sign-in" className={`header__link header__link_logged-in ${isMenuAllowed ? 'header__link_hidden' : ''}`} onClick={handleLogoutClick}>Выйти</Link>
+                  <Link to="/sign-in" className={`header__link header__link_logged-in ${isMenuAllowed ? 'header__link_hidden' : ''}`} onClick={handleLogoutClick}>Logout</Link>
                   <button className="header__menu-button" onClick={toggleMenu}>
-                    <img src={isMenuOpen ? close : menu} alt="Меню" />
+                    <img src={isMenuOpen ? close : menu} alt="Menu" />
                   </button>
                 </>
               )
 
             default:
-              return <Link to="/" className="header__link">Ссылка</Link>
+              return <Link to="/" className="header__link">Link</Link>
           }
         })()
         }

@@ -44,7 +44,7 @@ export default function AddPlacePopup({ isOpen, isLoading, onClose, onAddPlace }
 
   function handleAddPlaceSubmit(e) {
     e.preventDefault();
-    
+
     onAddPlace({
       name,
       link
@@ -54,32 +54,32 @@ export default function AddPlacePopup({ isOpen, isLoading, onClose, onAddPlace }
   function handleValidation(e) {
     const inputElement = e.target;
 
-    switch(inputElement.name) {
-      case 'placeName' : {
-        if(!inputElement.validity.valid) {
+    switch (inputElement.name) {
+      case 'placeName': {
+        if (!inputElement.validity.valid) {
           setIsNameError(true);
           setNameError(inputElement.validationMessage);
-          
+
         } else {
           setIsNameError(false);
           setNameError('');
-          
+
         }
         break;
       }
-      case 'placeLink' : {
-        if(!inputElement.validity.valid) {
+      case 'placeLink': {
+        if (!inputElement.validity.valid) {
           setIsLinkError(true);
           setLinkError(inputElement.validationMessage);
-          
+
         } else {
           setIsLinkError(false);
           setLinkError('');
-          
+
         }
         break;
       }
-      default: {}
+      default: { }
     }
   }
 
@@ -101,32 +101,32 @@ export default function AddPlacePopup({ isOpen, isLoading, onClose, onAddPlace }
   }, [isNameError, isLinkError, name, link])
 
   return (
-    <PopupWithForm name="add" title="Новое место" isOpen={isOpen} isLoading={isLoading} isSubmitValid={isSubmitValid} onClose={onClose} onSubmit={handleAddPlaceSubmit} submitText="Создать">
+    <PopupWithForm name="add" title="New place" isOpen={isOpen} isLoading={isLoading} isSubmitValid={isSubmitValid} onClose={onClose} onSubmit={handleAddPlaceSubmit} submitText="Post">
       <input
         className={nameInputClassName}
         type="text"
         name="placeName"
         id="placeName"
-        placeholder="Название"
+        placeholder="Name"
         minLength="2"
         maxLength="30"
         required
         value={name}
         onChange={handleChangeName}
       />
-      <span className={nameErrorClassName} id="placeName-error">{ isNameError && nameError }</span>
+      <span className={nameErrorClassName} id="placeName-error">{isNameError && nameError}</span>
       <input
         className={linkInputClassName}
         type="url"
         name="placeLink"
         id="placeLink"
-        placeholder="Ссылка на картинку"
+        placeholder="Image link"
         minLength="2"
         required
         value={link}
         onChange={handleChangeLink}
       />
-      <span className={linkErrorClassName} id="placeLink-error">{ isLinkError && linkError }</span>
+      <span className={linkErrorClassName} id="placeLink-error">{isLinkError && linkError}</span>
     </PopupWithForm>
   )
 }

@@ -16,7 +16,7 @@ function Register(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.onRegister({email, password});
+    props.onRegister({ email, password });
     setEmail('');
     setPassword('');
   }
@@ -24,13 +24,13 @@ function Register(props) {
   return (
     <div className="auth">
       <div className="auth__container">
-        <h2 className="auth__title">Регистрация</h2>
+        <h2 className="auth__title">Registration</h2>
         <form className="auth__form" onSubmit={handleSubmit}>
           <input className="auth__input" type="text" id="registerEmail" placeholder="Email" value={email} onChange={handleChangeEmail} required />
-          <input className="auth__input" type="text" id="registerPassword" placeholder="Пароль" value={password} onChange={handleChangePassword} required />
-          <button className="auth__submit-button">Зарегистрироваться</button>
+          <input className="auth__input" type="text" id="registerPassword" placeholder="Password" value={password} onChange={handleChangePassword} required />
+          <button className="auth__submit-button">Register</button>
         </form>
-        <Link to="/sign-in" className="auth__login-link">Уже зарегистрированы? Войти</Link>
+        <Link to="/sign-in" className="auth__login-link">Already registered? Sign in</Link>
       </div>
     </div>
   )

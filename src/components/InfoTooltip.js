@@ -14,16 +14,16 @@ function InfoTooltip(props) {
           ? (() => {
             switch (location.pathname) {
               case '/':
-                return 'Вы успешно вошли!'
-              
+                return 'You have successfully logged into your account!'
+
               case '/sign-in':
-                return 'Вы успешно зарегистрировались!'
+                return 'You have successfully registered an account!'
 
               default:
-                return 'Успех!'
+                return 'Success!'
             }
           })()
-          : 'Что-то пошло не так! Попробуйте ещё раз.'}
+          : 'Something went wrong! Try again.'}
         </h2>
         <button className="popup__close-button" type="button" onClick={props.onClose}></button>
       </div>

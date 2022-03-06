@@ -8,7 +8,7 @@ class Api {
     if (res.ok) {
       return res.json();
     }
-    return Promise.reject(`Ошибка ${res.status}`);
+    return Promise.reject(`Error ${res.status}`);
   }
 
   getInitialCards() {
@@ -17,7 +17,7 @@ class Api {
         authorization: this._token,
       },
     })
-    .then(this._checkResponse)
+      .then(this._checkResponse)
   }
 
   setProfileInfo(data) {
@@ -32,7 +32,7 @@ class Api {
         about: data.about,
       }),
     })
-    .then(this._checkResponse);
+      .then(this._checkResponse);
   }
 
   getProfileInfo() {
@@ -42,7 +42,7 @@ class Api {
         'Content-Type': 'application/json',
       },
     })
-    .then(this._checkResponse);
+      .then(this._checkResponse);
   }
 
   addPlace(data) {
@@ -57,7 +57,7 @@ class Api {
         link: data.link,
       }),
     })
-    .then(this._checkResponse);
+      .then(this._checkResponse);
   }
 
   removeCard(cardId) {
@@ -67,7 +67,7 @@ class Api {
         authorization: this._token,
       },
     })
-    .then(this._checkResponse);
+      .then(this._checkResponse);
   }
 
   changeLikeCardStatus(cardId, isLiked) {
@@ -77,7 +77,7 @@ class Api {
         authorization: this._token,
       },
     })
-    .then(this._checkResponse);
+      .then(this._checkResponse);
   }
 
   changeAvatar(avatarLink) {
@@ -91,7 +91,7 @@ class Api {
         avatar: avatarLink,
       }),
     })
-    .then(this._checkResponse);
+      .then(this._checkResponse);
   }
 }
 

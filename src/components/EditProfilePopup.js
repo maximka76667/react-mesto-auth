@@ -47,7 +47,7 @@ export default function EditProfilePopup({ isOpen, isLoading, onClose, onUpdateU
 
   function handleSubmit(e) {
     e.preventDefault();
-    
+
     onUpdateUser({
       name,
       about: description,
@@ -57,9 +57,9 @@ export default function EditProfilePopup({ isOpen, isLoading, onClose, onUpdateU
   function handleValidation(e) {
     const inputElement = e.target;
 
-    switch(inputElement.name) {
-      case 'profileName' : {
-        if(!inputElement.validity.valid) {
+    switch (inputElement.name) {
+      case 'profileName': {
+        if (!inputElement.validity.valid) {
           setIsNameError(true);
           setNameError(inputElement.validationMessage);
           setIsSubmitValid(false);
@@ -70,8 +70,8 @@ export default function EditProfilePopup({ isOpen, isLoading, onClose, onUpdateU
         }
         break;
       }
-      case 'profilePosition' : {
-        if(!inputElement.validity.valid) {
+      case 'profilePosition': {
+        if (!inputElement.validity.valid) {
           setIsDescriptionError(true);
           setDescriptionError(inputElement.validationMessage);
           setIsSubmitValid(false);
@@ -82,7 +82,7 @@ export default function EditProfilePopup({ isOpen, isLoading, onClose, onUpdateU
         }
         break;
       }
-      default: {}
+      default: { }
     }
   }
 
@@ -100,33 +100,33 @@ export default function EditProfilePopup({ isOpen, isLoading, onClose, onUpdateU
   }, [isOpen])
 
   return (
-    <PopupWithForm name="edit" title="Редактировать профиль" submitText="Сохранить" isOpen={isOpen} isLoading={isLoading} isSubmitValid={isSubmitValid} onClose={onClose} onSubmit={handleSubmit} >
+    <PopupWithForm name="edit" title="Edit profile" submitText="Save" isOpen={isOpen} isLoading={isLoading} isSubmitValid={isSubmitValid} onClose={onClose} onSubmit={handleSubmit} >
       <input
         className={nameInputClassName}
         type="text"
         name="profileName"
         id="profileName"
-        placeholder="Ваше имя"
+        placeholder="Your name"
         minLength="2"
         maxLength="40"
         required
         value={`${name}`}
         onChange={handleChangeName}
       />
-      <span className={nameErrorClassName}>{ isNameError && nameError }</span>
+      <span className={nameErrorClassName}>{isNameError && nameError}</span>
       <input
         className={descriptionInputClassName}
         type="text"
         name="profilePosition"
         id="profilePosition"
-        placeholder="Ваша должность"
+        placeholder="Your position"
         minLength="2"
         maxLength="200"
         required
         value={`${description}`}
         onChange={handleChangeDescription}
       />
-      <span className={descriptionErrorClassName}>{ isDescriptionError && descriptionError }</span>
+      <span className={descriptionErrorClassName}>{isDescriptionError && descriptionError}</span>
     </PopupWithForm>
   )
 }

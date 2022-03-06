@@ -22,7 +22,7 @@ export default function EditAvatarPopup({ isOpen, isLoading, onClose, onUpdateAv
     e.preventDefault();
 
     onUpdateAvatar({
-      avatar: avatar
+      avatar
     });
   }
 
@@ -54,13 +54,13 @@ export default function EditAvatarPopup({ isOpen, isLoading, onClose, onUpdateAv
   }, [isOpen])
 
   return (
-    <PopupWithForm name="avatar" title="Обновить аватар" isOpen={isOpen} isLoading={isLoading} isSubmitValid={isSubmitValid} onClose={onClose} onSubmit={handleUpdateAvatar} submitText="Сохранить">
+    <PopupWithForm name="avatar" title="Update avatar" isOpen={isOpen} isLoading={isLoading} isSubmitValid={isSubmitValid} onClose={onClose} onSubmit={handleUpdateAvatar} submitText="Save">
       <input
         className={inputClassName}
         type="url"
         name="avatarLink"
         id="avatarLink"
-        placeholder="Ссылка на картинку"
+        placeholder="Image link"
         minLength="2"
         required
         onChange={handleChangeAvatar}

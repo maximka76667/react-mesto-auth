@@ -9,6 +9,6 @@ export default function RemovePopup({ isOpen, isLoading, onClose, onCardDelete, 
   }
 
   return (
-    <PopupWithForm name="remove" title="Вы уверены?" isOpen={isOpen} isLoading={isLoading} onClose={onClose} onSubmit={handleCardDelete} submitText="Да" isSubmitValid={true} />
+    <PopupWithForm name="remove" title="Are you sure?" isOpen={isOpen} isLoading={isLoading} onClose={onClose} onSubmit={handleCardDelete} submitText="Yep" isSubmitValid={true} />
   )
 }

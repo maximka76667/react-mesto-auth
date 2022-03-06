@@ -12,7 +12,7 @@ export default function PopupWithForm({ isOpen, isLoading, name, title, onSubmit
         <h2 className="popup__title">{title}</h2>
         <form className="popup__form" name={name} onSubmit={onSubmit} noValidate>
           {children}
-          <button className={buttonClassName} type="submit" disabled={!isSubmitValid}>{ isLoading ? 'Загрузка...' : submitText }</button>
+          <button className={buttonClassName} type="submit" disabled={!isSubmitValid}>{isLoading ? 'Loading...' : submitText}</button>
         </form>
         <button className="popup__close-button" type="button" onClick={onClose}></button>
       </div>

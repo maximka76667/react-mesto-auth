@@ -28,7 +28,7 @@ export default function Card({ card, onClick, onCardLike, onCardDelete }) {
       <div className="card__image-container">
         <img src={card.link} alt={card.name} className="card__image" onClick={handleClick} />
       </div>
-      { isOwner ? <button className='card__delete-button' onClick={handleCardDelete}></button> : null}
+      {isOwner ? <button className='card__delete-button' onClick={handleCardDelete}></button> : null}
       <div className="card__info">
         <h2 className="card__title">{card.name}</h2>
         <div className="card__like">

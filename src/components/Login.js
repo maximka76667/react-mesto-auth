@@ -16,7 +16,7 @@ function Login(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.onLogin({login, password});
+    props.onLogin({ login, password });
     setLogin('');
     setPassword('');
   }
@@ -24,11 +24,11 @@ function Login(props) {
   return (
     <div className="auth">
       <div className="auth__container">
-        <h2 className="auth__title">Вход</h2>
+        <h2 className="auth__title">Sign in</h2>
         <form className="auth__form" onSubmit={handleSubmit}>
-          <input className="auth__input" type="text" id="loginLogin" placeholder="Логин" value={login} onChange={handleLoginChange} required />
-          <input className="auth__input" type="text" id="loginPassword" placeholder="Пароль" value={password} onChange={handlePasswordChange} required />
-          <button className="auth__submit-button">Войти</button>
+          <input className="auth__input" type="text" id="loginLogin" placeholder="Login" value={login} onChange={handleLoginChange} required />
+          <input className="auth__input" type="text" id="loginPassword" placeholder="Password" value={password} onChange={handlePasswordChange} required />
+          <button className="auth__submit-button">Let's go</button>
         </form>
       </div>
     </div>
