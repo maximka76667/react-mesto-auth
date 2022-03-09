@@ -1,20 +1,20 @@
-# Проект 4: Место
+# Mesto
 
-## Описание
+## Description
 
-Проект с фотографиями мест России.  
-У сайта есть адаптивная верстка. Используются flex и grid.  
-Функционал:
+A project with photos of places.  
+The site has an adaptive layout. Used flex and grid.  
+Functionality:
 
-- Редактирование информации в профиле
-- Добавление новых карточек
-- Лайки карточек
-- Просмотр увеличенных фотографий
+- Editing information in the profile.
+- Add new cards
+- Like cards
+- View enlarged photos
 
-В коде используются классы для карточек и валидации форм.
+The code uses classes for cards and form validation.
 
-## Ссылки
+## References
 
-Макет в Figma: [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1])  
+Layout in Figma: [Link to layout in Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1])  
 GitHub: https://github.com/maximka76667/react-mesto-auth  
 GitHub-pages: https://maximka76667.github.io/react-mesto-auth    
